@@ -39,8 +39,8 @@ export class LibraryController {
     @ApiTags('도서 API')
     @Get('getBook:book_id')
     @ApiOperation({ summary: '특정 도서 조회 API', description: '도서id로 특정 도서 정보를 조회합니다.' })
-    getOneBook(@Param('book_id') book_id: number): Promise<BookEntity> {
-        return this.libraryService.findOneBook(book_id);
+    getOneBook(@Param('book_id') id: number): Promise<BookEntity> {
+        return this.libraryService.findOneBook(id);
     }
 
     @ApiTags('도서 API')
@@ -50,15 +50,16 @@ export class LibraryController {
         return this.libraryService.newBook(book);
     }
 
-    /*@ApiTags('도서 API')
+    @ApiTags('도서 API')
     @Patch('updateBook:book_id')
-    update(@Param('book_id') book_id: number, @Body() book: BookEntity) {
-        return this.libraryService.updateBook(book_id, book);
-    }*/
+    @ApiOperation({ summary: '도서 정보 수정  API', description: '도서 정보를 수정합니다.' })
+    update(@Param('book_id') id: number, @Body() book: BookEntity) {
+        return this.libraryService.updateBook(id, book);
+    }
 
     @ApiTags('도서 API')
     @Delete('deleteBook:book_id')
-    remove(@Param('book_id') book_id: number) {
-        return this.libraryService.remove(book_id);
+    remove(@Param('book_id') id: number) {
+        return this.libraryService.remove(id);
     }
 }

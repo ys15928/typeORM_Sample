@@ -38,21 +38,10 @@ export class LibraryService {
         await this.BookRepository.save(book);
     }
 
-    /*updateBook = async (req: Request, res: Response) => {
-        const userRepo = AppDataSource.getRepository(BookEntity);
+    async updateBook(book_id: number, book: BookEntity): Promise<void> {
+        await this.BookRepository.update(book_id, book);
 
-        await userRepo
-            .createQueryBuilder()
-            .update(BookEntity)
-            .set(req.body)
-            .where({ firstName: req.params.firstName })
-            .execute()
-            .then((data) => {
-                res.json(data);
-                console.log("Update User: ", data);
-            })
-            .catch((err) => console.log(err));
-    };*/
+    }
 
     async remove(book_id: number): Promise<void> {
         await this.BookRepository.delete(book_id);

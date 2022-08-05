@@ -17,5 +17,5 @@ export class BookEntity {
 
     @Column()
     @ApiProperty({ description: '작가 id' })
-    auth_id: string;
+    auth_id: number;
 }
