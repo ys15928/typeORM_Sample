@@ -1,10 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { AuthorEntity } from './author.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('book')
 export class BookEntity {
-    @PrimaryGeneratedColumn()
-    @ApiProperty({ description: '도서_id' })
+    @PrimaryGeneratedColumn('increment')
+    @ApiProperty({ description: '도서 id' })
     book_id: number;
 
     @Column()
@@ -15,7 +16,12 @@ export class BookEntity {
     @ApiProperty({ description: '도서 제목' })
     title: string;
 
-    @Column()
+    /*@Column()
     @ApiProperty({ description: '작가 id' })
     auth_id: number;
+    */
+    @Column()
+    @ManyToOne(() => AuthorEntity, (author) => author.books)
+    author: AuthorEntity
+
 }

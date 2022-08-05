@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AuthorEntity } from './entity/author.entity';  // 작가 엔티티 파일의 class import
 import { BookEntity } from './entity/book.entity';  // 도서  엔티티 파일의 class import
-import { AppDataSource } from './datasource';
 
 @Injectable()
 export class LibraryService {
