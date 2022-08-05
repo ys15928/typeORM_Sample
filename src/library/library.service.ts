@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AuthorEntity } from './entity/author.entity';  // 작가 엔티티 파일의 class import
 import { BookEntity } from './entity/book.entity';  // 도서  엔티티 파일의 class import
-import { getConnection } from "typeorm"; // 버전에 따라 안됨
+import { AppDataSource } from './datasource';
 
 @Injectable()
 export class LibraryService {
@@ -38,19 +38,23 @@ export class LibraryService {
         await this.BookRepository.save(book);
     }
 
-    async update(book_id: number, book: BookEntity): Promise<void> {
-        const existCat = await this.BookRepository.findOneBy({ book_id });
-        if (existCat) {
-            await getConnection()
-                .createQueryBuilder()
-                .update(BookEntity)
-                .set({
-                    isbn: book.isbn,
-                    title: book.title,
-                    auth_id: book.auth_id
-                })
-                .where("book_id = :book_id", { book_id })
-                .execute();
-        }
+    /*updateBook = async (req: Request, res: Response) => {
+        const userRepo = AppDataSource.getRepository(BookEntity);
+
+        await userRepo
+            .createQueryBuilder()
+            .update(BookEntity)
+            .set(req.body)
+            .where({ firstName: req.params.firstName })
+            .execute()
+            .then((data) => {
+                res.json(data);
+                console.log("Update User: ", data);
+            })
+            .catch((err) => console.log(err));
+    };*/
+
+    async remove(book_id: number): Promise<void> {
+        await this.BookRepository.delete(book_id);
     }
 }
