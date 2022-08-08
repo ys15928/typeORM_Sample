@@ -39,7 +39,6 @@ export class LibraryService {
 
     async updateBook(book_id: number, book: BookEntity): Promise<void> {
         await this.BookRepository.update(book_id, book);
-
     }
 
     async remove(book_id: number): Promise<void> {

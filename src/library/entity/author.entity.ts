@@ -8,17 +8,18 @@ export class AuthorEntity {
     @ApiProperty({ description: '작가 id' })
     author_id: number;
 
-    @Column()
+    @Column({ nullable: false })
     @ApiProperty({ description: '작가 성씨' })
     first_name: string;
 
-    @Column()
+    @Column({ nullable: false })
     @ApiProperty({ description: '작가 이름' })
     last_name: string;
 
-    //@OneToMany(() => BookEntity, (book) => book.auth_id)
-    //books!: BookEntity[];
+    @Column({ nullable: false, unique: true })
+    @ApiProperty({ description: '작가 고유번호' })
+    author_uniqueNum: string;
 
-    @OneToMany(() => BookEntity, (book) => book.author)
-    books: BookEntity[]
+    @OneToMany((type) => BookEntity, (book) => book.auth_id)
+    books!: BookEntity[]
 }
