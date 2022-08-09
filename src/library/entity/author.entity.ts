@@ -20,6 +20,6 @@ export class AuthorEntity {
     @ApiProperty({ description: '작가 고유번호' })
     author_uniqueNum: string;
 
-    @OneToMany((type) => BookEntity, (book) => book.auth_id)
+    @OneToMany((type) => BookEntity, (book) => book.auth_uniqe)
     books!: BookEntity[]
 }

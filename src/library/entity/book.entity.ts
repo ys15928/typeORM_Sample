@@ -18,11 +18,14 @@ export class BookEntity {
 
     @Column({ nullable: false })
     @ApiProperty({ description: '작가 id' })
-    auth_id: number;
+    auth_uniqe: string;
 
     @ManyToOne((type) => AuthorEntity, {
-        cascade: ["insert", "update", "remove"]
+        cascade: true
     })
-    @JoinColumn({ name: 'auth_id' })
+    @JoinColumn({
+        name: 'auth_unique',
+        referencedColumnName: 'author_uniqueNum'
+    })
     author!: AuthorEntity
 }
